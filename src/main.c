@@ -10,3 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <minishell.h>
+
+int main(int argc, char **argv, char **env)
+{
+    (void) argc;
+    (void) argv;
+    (void) env;
+
+
+    t_data *data = malloc(sizeof(t_data));
+    while (1)
+    {
+        data->query = readline("minishell> ");
+        parse(data);
+    }
+}

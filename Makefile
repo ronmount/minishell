@@ -1,7 +1,8 @@
 SRC 	= 	src/main.c \
 			src/list_utils/list.c \
 			src/utils/ft_strcmp.c \
-			src/utils/ft_split.c
+			src/utils/ft_split.c \
+			src/utils/read_env.c \
 
 NAME = minishell
 
@@ -18,7 +19,7 @@ RM = rm -f
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(CC)  $(OBJS) -o $(NAME)
+			$(CC) -l readline $(OBJS) -o $(NAME)
 
 clean:
 			@$(RM) $(OBJS)

@@ -27,5 +27,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
 t_list	*add(t_list *head, void *k, void *v);
 t_list	*get_n(t_list *head, int n);
+t_list	*find(t_list *head, void *k);
+t_list	*read_env(char **env);
+void	print_env(t_list *head);
 
 #endif

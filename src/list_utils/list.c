@@ -2,6 +2,7 @@
 
 t_list	*add(t_list *head, void *k, void *v)
 {
+	t_list	*buf;
 	t_list	*node;
 
 	node = malloc(sizeof(t_list));
@@ -10,9 +11,14 @@ t_list	*add(t_list *head, void *k, void *v)
 	node->k = k;
 	node->v = v;
 	if (head)
-		head->next = node;
-	else
-		return (node);
+	{
+		buf = head;
+		while (buf->next)
+			buf = buf->next;
+		buf->next = node;
+		return (head);
+	}
+	head = node;
 	return (head);
 }
 
@@ -69,8 +75,9 @@ t_list	*get_n(t_list *head, int n)
 		return (0);
 	buf = head;
 	i = -1;
-	while (buf && ++i)
+	while (buf)
 	{
+		i++;
 		if (i == n)
 			return (buf);
 		buf = buf->next;

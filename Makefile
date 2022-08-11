@@ -3,12 +3,19 @@ SRC 	= 	src/main.c \
 			src/utils/ft_strcmp.c \
 			src/utils/ft_split.c \
 			src/utils/read_env.c \
+			src/utils/ft_calloc.c \
+			src/utils/ft_bzero.c \
+			src/utils/ft_strchr.c \
+			src/utils/ft_strlen.c \
+			src/utils/ft_strlcpy.c \
+			src/utils/ft_strdup.c \
+
 
 NAME = minishell
 
 OBJS = ${SRC:%.c=%.o}
 
-CC = cc # -Wall -Werror -Wextra
+CC = cc -fsanitize=address # -Wall -Werror -Wextra
 
 RM = rm -f
 
@@ -29,4 +36,4 @@ fclean:		clean
 
 re: 		fclean all
 
-.PHONY: clean fclean re all
+.PHONY: 	clean fclean re all

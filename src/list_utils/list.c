@@ -8,8 +8,9 @@ t_list	*add(t_list *head, void *k, void *v)
 	node = malloc(sizeof(t_list));
 	if (node == 0)
 		return (0);
-	node->k = k;
-	node->v = v;
+	node->key = k;
+	node->value = v;
+	node->next = 0;
 	if (head)
 	{
 		buf = head;
@@ -18,8 +19,7 @@ t_list	*add(t_list *head, void *k, void *v)
 		buf->next = node;
 		return (head);
 	}
-	head = node;
-	return (head);
+	return (node);
 }
 
 t_list	*del(t_list *head, t_list *del_node)
@@ -59,7 +59,7 @@ t_list	*find(t_list *head, void *k)
 	buf = head;
 	while (buf)
 	{
-		if (!ft_strcmp((char *)buf->k, (char *)k))
+		if (!ft_strcmp((char *)buf->key, (char *)k))
 			return (buf);
 		buf = buf->next;
 	}

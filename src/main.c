@@ -2,29 +2,29 @@
 
 t_data	*init(char **env)
 {
-	t_data 	*data;
-	char	**builtin;
-	int 	i;
+	t_data	*data;
+	char	**splitted_builtins;
+	int		i;
 
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
 	i = -1;
-	builtin = ft_split(BUILTIN, ':');
+	splitted_builtins = ft_split(BUILTIN, ':');
 	data->env = NULL;
 	data->builtin = NULL;
 	data->env = read_env(env);
-	while (builtin[++i])
-		data->builtin = add(data->builtin, (void *) builtin[i], (void *) builtin[i]);
+	while (splitted_builtins[++i])
+		data->builtin = add(data->builtin,
+				(void *) splitted_builtins[i], (void *) splitted_builtins[i]);
 	return (data);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*buf;
-	t_list *list;
-	t_data *data;
+	t_data	*data;
+
 	data = init(env);
-	printf("%d %d", execve("/bin/pwd", argv, env), errno);
+	printf("%s\n", (char *) find(data->env, "USER")->value);
 	return (0);
 }

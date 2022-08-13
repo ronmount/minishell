@@ -21,8 +21,8 @@ typedef struct s_list
 
 typedef struct s_data
 {
-	t_list *env;
-	t_list *builtin;
+	t_list	*env;
+	t_list	*builtin;
 }	t_data;
 
 int		ft_strcmp(const char *s1, const char *s2);

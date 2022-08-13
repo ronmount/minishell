@@ -45,6 +45,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 t_list	*get_n(t_list *head, int n);
 t_list	*read_env(char **env);
+t_list	*del(t_list *head, t_list *del_node);
 
 int		ft_pwd(char *command);
 int		ft_cd(t_data *data, char *dir);

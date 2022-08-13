@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 //int ft_pwd(t_command *command)
 int ft_pwd(char *command)

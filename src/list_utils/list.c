@@ -25,6 +25,7 @@ t_list	*add(t_list *head, void *k, void *v)
 t_list	*del(t_list *head, t_list *del_node)
 {
 	t_list	*buf;
+	t_list	*prev;
 
 	if (head == 0)
 		return (0);
@@ -36,15 +37,20 @@ t_list	*del(t_list *head, t_list *del_node)
 			if (del_node == head)
 			{
 				buf = head->next;
-				// TODO: free k, v etc
+				if (head->key != head->value)
+					free(head->key);
+				free(head->value);
 				free(head);
 				return (buf);
 			}
-			buf->next = del_node->next;
-			// TODO: free k, v etc
+			prev->next = del_node->next;
+			if (del_node->key != del_node->value)
+				free(del_node->key);
+			free(del_node->value);
 			free(del_node);
 			return (head);
 		}
+		prev = buf;
 		buf = buf->next;
 	}
 	return (0);

@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 //int	ft_env(t_data *data, t_command *command)
 int	ft_env(t_data *data, char *command)

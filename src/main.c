@@ -25,6 +25,8 @@ int	main(int argc, char **argv, char **env)
 	t_data	*data;
 
 	data = init(env);
-	printf("%s\n", (char *) find(data->env, "USER")->value);
+	print_env(data->env);
+	del(data->env, find(data->env, "USER"));
+	print_env(data->env);
 	return (0);
 }

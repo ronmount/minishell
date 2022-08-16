@@ -23,6 +23,14 @@ t_data	*init(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	*data;
+	char	*str;
 
+	data = init(env);
+	while (1)
+	{
+		str = readline("minishell: ");
+		first_step(data, str);
+		write(1, "\n", 1);
+	}
 	return (0);
 }

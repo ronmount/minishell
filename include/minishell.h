@@ -11,6 +11,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <string.h>
 
 typedef struct s_list
 {
@@ -46,6 +47,7 @@ void	ft_putchar_fd(char c, int fd);
 t_list	*get_n(t_list *head, int n);
 t_list	*read_env(char **env);
 t_list	*del(t_list *head, t_list *del_node);
+void	first_step(t_data *data, char *str);
 
 int		ft_pwd(char *command);
 int		ft_cd(t_data *data, char *dir);

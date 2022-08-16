@@ -16,6 +16,7 @@ SRC 	= 	src/builtins/cd.c \
             src/utils/ft_putendl_fd.c \
             src/utils/ft_putstr_fd.c \
             src/utils/ft_strjoin.c \
+            src/lexer/first_step.c \
 
 
 NAME = minishell

@@ -2,53 +2,43 @@
 
 void	first_step(t_data *data, char *str)
 {
+	char	*buf;
 	int		single_quote;
 	int		double_quote;
 	int		i;
+	int		j;
 
 	i = -1;
+	j = -1;
 	single_quote = 0;
 	double_quote = 0;
+	buf = ft_calloc(ft_strlen(str) + 1, 1);
 	while (str[++i])
 	{
-		if (str[i] == '\'')
+		j += 1;
+		if (str[i] == '\'' && !double_quote)
+			single_quote = !single_quote;
+		else if (str[i] == '\"' && !single_quote)
+			double_quote = !double_quote;
+		else if (str[i] == '&' && str[i + 1] == '&' && !single_quote && !double_quote)
 		{
-			if (!double_quote)
-			{
-				single_quote = !single_quote;
-				continue ;
-			}
-		}
-		else if (str[i] == '\"')
-		{
-			if (!single_quote)
-			{
-				double_quote = !double_quote;
-				continue ;
-			}
-		}
-		else if (str[i] == '&')
-		{
-			if (str[i + 1] == '&' && !single_quote && !double_quote)
-			{
-				// todo: split me here
-				i += 1;
-				continue ;
-			}
-			write(1, &str[i], 1);
+			data->groups = add_group(data->groups, ft_strdup(buf), NEXT_AND);
+			buf = calloc(ft_strlen(str + 1), 1);
+			i += 1;
+			j = -1;
 			continue ;
 		}
-		else if (str[i] == '|')
+		else if (str[i] == '|' && str[i + 1] == '|' && !single_quote && !double_quote)
 		{
-			if (str[i + 1] == '|' && !single_quote && !double_quote)
-			{
-				// todo: split me here
-				i += 1;
-				continue ;
-			}
-			// todo: pipe me here
+			data->groups = add_group(data->groups, ft_strdup(buf), NEXT_OR);
+			buf = calloc(ft_strlen(str + 1), 1);
+			i += 1;
+			j = -1;
 			continue ;
 		}
-		write(1, &str[i], 1);
+		buf[j] = str[i];
 	}
+	if (ft_strlen(buf))
+		data->groups = add_group(data->groups, ft_strdup(buf), NEXT_NONE);
+	free(buf);
 }

@@ -2,6 +2,8 @@ SRC 	= 	src/builtins/cd.c \
             src/builtins/env.c \
             src/builtins/pwd.c \
             src/list_utils/list.c \
+            src/list_utils/command.c \
+            src/list_utils/group.c \
             src/main.c \
             src/utils/ft_bzero.c \
             src/utils/ft_calloc.c \
@@ -17,7 +19,6 @@ SRC 	= 	src/builtins/cd.c \
             src/utils/ft_putstr_fd.c \
             src/utils/ft_strjoin.c \
             src/lexer/first_step.c \
-
 
 NAME = minishell
 

@@ -90,3 +90,18 @@ t_list	*get_n(t_list *head, int n)
 	}
 	return (0);
 }
+
+int	len(t_list *head)
+{
+	int		i;
+	t_list	*buf;
+
+	i = 0;
+	buf = head;
+	while (buf)
+	{
+		i += 1;
+		buf = buf->next;
+	}
+	return (i);
+}

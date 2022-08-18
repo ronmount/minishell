@@ -28,14 +28,22 @@ int	main(int argc, char **argv, char **env)
 
 	data = init(env);
 	str = readline("minishell: ");
-	first_step(data, str);
+	split_groups(data, str);
 	// test proposes
 	int		i = -1;
-	int		len = len_group(data->groups);
-	while (++i < len)
+	int		len_g = len_group(data->groups);
+	while (++i < len_g)
 	{
-		t_group *g = get_n_group(data->groups, i);
+		int j = -1;
+		t_group	*g = get_n_group(data->groups, i);
+		split_cmd(data, g);
 		printf("group: [%s] next_code: [%d]\n", g->group, g->next_flag);
+		int len_c = len_cmd(g->cmds);
+		while (++j < len_c)
+		{
+			t_command *c = get_n_cmd(g->cmds, j);
+			printf("\tcmd: [%s]\n", c->cmd);
+		}
 	}
 	return (0);
 }

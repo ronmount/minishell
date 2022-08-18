@@ -69,12 +69,14 @@ void		ft_putchar_fd(char c, int fd);
 t_list		*get_n(t_list *head, int n);
 t_list		*read_env(char **env);
 t_list		*del(t_list *head, t_list *del_node);
-void		first_step(t_data *data, char *str);
+void		split_groups(t_data *data, char *str);
 t_group		*add_group(t_group *head, char *group, int next_flag);
 t_command	*add_cmd(t_command *head, char *cmd);
 t_group		*get_n_group(t_group *head, int n);
 int			len_group(t_group *head);
-
+void		split_cmd(t_data *data, t_group *g);
+t_command	*get_n_cmd(t_command *head, int n);
+int			len_cmd(t_command *head);
 int			ft_pwd(char *command);
 int			ft_cd(t_data *data, char *dir);
 int			ft_env(t_data *data, char *command);

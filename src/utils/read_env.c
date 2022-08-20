@@ -35,11 +35,11 @@ void	print_env(t_list *head)
 
 	buf = head;
 	i = -1;
-	while (buf)
+	while (head)
 	{
 		++i;
 		node = get_n(head, i);
 		printf("%s=%s\n", (char *)node->key, (char *)node->value);
-		buf = buf->next;
+		head = head->next;
 	}
 }

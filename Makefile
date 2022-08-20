@@ -1,24 +1,25 @@
 SRC 	= 	src/builtins/cd.c \
             src/builtins/env.c \
             src/builtins/pwd.c \
-            src/list_utils/list.c \
+            src/lexer/parser.c \
             src/list_utils/command.c \
-            src/list_utils/group.c \
+            src/list_utils/pipe_group.c \
+            src/list_utils/list.c \
+            src/list_utils/exit_group.c \
             src/main.c \
             src/utils/ft_bzero.c \
             src/utils/ft_calloc.c \
+            src/utils/ft_putchar_fd.c \
+            src/utils/ft_putendl_fd.c \
+            src/utils/ft_putstr_fd.c \
             src/utils/ft_split.c \
             src/utils/ft_strchr.c \
             src/utils/ft_strcmp.c \
             src/utils/ft_strdup.c \
+            src/utils/ft_strjoin.c \
             src/utils/ft_strlcpy.c \
             src/utils/ft_strlen.c \
             src/utils/read_env.c \
-            src/utils/ft_putchar_fd.c \
-            src/utils/ft_putendl_fd.c \
-            src/utils/ft_putstr_fd.c \
-            src/utils/ft_strjoin.c \
-            src/lexer/parser.c \
 
 NAME = minishell
 

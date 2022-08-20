@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-t_group	*add_group(t_group *head, char *group, int next_flag)
+t_pipe_group	*add_pipe_group(t_pipe_group *head, char *group, int next_flag)
 {
-	t_group	*buf;
-	t_group	*node;
+	t_pipe_group	*buf;
+	t_pipe_group	*node;
 
-	node = malloc(sizeof(t_group));
+	node = malloc(sizeof(t_pipe_group));
 	if (node == 0)
 		return (0);
 	node->cmds = 0;
@@ -25,10 +25,10 @@ t_group	*add_group(t_group *head, char *group, int next_flag)
 	return (node);
 }
 
-t_group	*get_n_group(t_group *head, int n)
+t_pipe_group	*get_n_pipe_group(t_pipe_group *head, int n)
 {
-	int			i;
-	t_group		*buf;
+	int					i;
+	t_pipe_group		*buf;
 
 	if (!head)
 		return (0);
@@ -44,10 +44,10 @@ t_group	*get_n_group(t_group *head, int n)
 	return (0);
 }
 
-int	len_group(t_group *head)
+int	len_pipe_group(t_pipe_group *head)
 {
-	int		i;
-	t_group	*buf;
+	int				i;
+	t_pipe_group	*buf;
 
 	i = 0;
 	buf = head;

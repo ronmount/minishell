@@ -14,10 +14,34 @@ t_data	*init(char **env)
 	data->env = NULL;
 	data->builtin = NULL;
 	data->env = read_env(env);
-	data->groups = 0;
+	data->exit_groups = 0;
 	while (splitted_builtins[++i])
 		data->builtin = add(data->builtin,
 				(void *) splitted_builtins[i], (void *) splitted_builtins[i]);
+	return (data);
+}
+
+t_data	*parse_line(t_data *data, char *str)
+{
+	int				i;
+	int				j;
+	int				lg;
+	int				lc;
+	t_exit_group	*g;
+	t_pipe_group	*c;
+
+	i = -1;
+	split_exit_groups(data, str);
+	lg = len_exit_group(data->exit_groups);
+	while (++i < lg)
+	{
+		j = -1;
+		g = get_n_exit_group(data->exit_groups, i);
+		split_pipe_groups(data, g);
+		lc = len_pipe_group(g->pipe_groups);
+		while (++j < lc)
+			c = get_n_pipe_group(g->pipe_groups, j);
+	}
 	return (data);
 }
 
@@ -28,22 +52,6 @@ int	main(int argc, char **argv, char **env)
 
 	data = init(env);
 	str = readline("minishell: ");
-	split_groups(data, str);
-	// test proposes
-	int		i = -1;
-	int		len_g = len_group(data->groups);
-	while (++i < len_g)
-	{
-		int j = -1;
-		t_group	*g = get_n_group(data->groups, i);
-		split_cmd(data, g);
-		printf("group: [%s] next_code: [%d]\n", g->group, g->next_flag);
-		int len_c = len_cmd(g->cmds);
-		while (++j < len_c)
-		{
-			t_command *c = get_n_cmd(g->cmds, j);
-			printf("\tcmd: [%s]\n", c->cmd);
-		}
-	}
+	parse_line(data, str);
 	return (0);
 }

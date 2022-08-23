@@ -16,6 +16,10 @@
 enum e_next_code {
 	NEXT_AND,
 	NEXT_OR,
+	NEXT_I_REDIRECT,
+	NEXT_O_REDIRECT,
+	NEXT_HEREDOC,
+	NEXT_APPEND,
 	NEXT_NONE,
 };
 
@@ -29,7 +33,7 @@ typedef struct s_list
 typedef struct s_command
 {
 	char				*cmd;
-	int					exitcode;
+	int					next_flag;
 	struct s_command	*next;
 }	t_command;
 
@@ -85,6 +89,10 @@ t_pipe_group	*get_n_pipe_group(t_pipe_group *head, int n);
 int				len_pipe_group(t_pipe_group *head);
 void			split_pipe_groups(t_data *data, t_exit_group *g);
 void			split_exit_groups(t_data *data, char *str);
+t_command		*add_cmd(t_command *head, char *cmd, enum e_next_code next_flag);
+t_command		*get_n_cmd(t_command *head, int n);
+int				len_cmd(t_command *head);
+void			split_cmd(t_data *data, t_pipe_group *g);
 
 int				ft_pwd(char *command);
 int				ft_cd(t_data *data, char *dir);

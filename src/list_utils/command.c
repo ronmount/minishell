@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_command	*add_cmd(t_command *head, char *cmd)
+t_command	*add_cmd(t_command *head, char *cmd, enum e_next_code next_flag)
 {
 	t_command	*buf;
 	t_command	*node;
@@ -11,6 +11,7 @@ t_command	*add_cmd(t_command *head, char *cmd)
 	node->cmd = cmd;
 	if (!node->cmd)
 		return (0);
+	node->next_flag = next_flag;
 	node->next = 0;
 	if (head)
 	{

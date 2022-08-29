@@ -93,6 +93,8 @@ t_command		*add_cmd(t_command *head, char *cmd, enum e_next_code next_flag);
 t_command		*get_n_cmd(t_command *head, int n);
 int				len_cmd(t_command *head);
 void			split_cmd(t_data *data, t_pipe_group *g);
+int				ft_isspace(char c);
+char			*clean_spaces(char *str);
 
 int				ft_pwd(char *command);
 int				ft_cd(t_data *data, char *dir);

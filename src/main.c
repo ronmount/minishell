@@ -50,6 +50,8 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
+	printf("[%s]\n", ft_split("kek        lol       ", ' ')[0]);
+	printf("[%s]\n", ft_split("kek        lol       ", ' ')[1]);
 	while (1) {
 		str = readline("minishell: ");
 		parse_line(data, str);
@@ -57,17 +59,17 @@ int	main(int argc, char **argv, char **env)
 		int egl = len_exit_group(data->exit_groups);
 		while (++i < egl) {
 			t_exit_group *eg = get_n_exit_group(data->exit_groups, i);
-			printf("eg: %s, next: %d\n", eg->exit_group, eg->next_flag);
+			printf("eg: [%s], next: %d\n", eg->exit_group, eg->next_flag);
 			int pgl = len_pipe_group(eg->pipe_groups);
 			int j = -1;
 			while (++j < pgl) {
 				t_pipe_group  *pg = get_n_pipe_group(eg->pipe_groups, j);
-				printf("\tpg: %s\n", pg->group);
+				printf("\tpg: [%s]\n", pg->group);
 				int k = -1;
 				int cl = len_cmd(pg->cmds);
 				while (++k < cl) {
 					t_command *c = get_n_cmd(pg->cmds, k);
-					printf("\t\tc: %s, next: %d\n", c->cmd, c->next_flag);
+					printf("\t\tc: [%s], next: %d\n", c->cmd, c->next_flag);
 				}
 			}
 		}

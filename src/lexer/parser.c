@@ -22,7 +22,7 @@ void	split_exit_groups(t_data *data, char *str)
 			double_quote = !double_quote;
 		else if (str[i] == '&' && str[i + 1] == '&' && !single_quote && !double_quote)
 		{
-			data->exit_groups = add_exit_group(data->exit_groups, ft_strdup(buf),
+			data->exit_groups = add_exit_group(data->exit_groups, clean_spaces(ft_strdup(buf)),
 									NEXT_AND);
 			buf = calloc(ft_strlen(str) + 1, 1);
 			i += 1;
@@ -31,7 +31,7 @@ void	split_exit_groups(t_data *data, char *str)
 		}
 		else if (str[i] == '|' && str[i + 1] == '|' && !single_quote && !double_quote)
 		{
-			data->exit_groups = add_exit_group(data->exit_groups, ft_strdup(buf),
+			data->exit_groups = add_exit_group(data->exit_groups, clean_spaces(ft_strdup(buf)),
 									 NEXT_OR);
 			ft_bzero(buf, (ft_strlen(str) + 1) * sizeof(char));
 			i += 1;
@@ -41,7 +41,7 @@ void	split_exit_groups(t_data *data, char *str)
 		buf[j] = str[i];
 	}
 	if (ft_strlen(buf))
-		data->exit_groups = add_exit_group(data->exit_groups, ft_strdup(buf),
+		data->exit_groups = add_exit_group(data->exit_groups, clean_spaces(ft_strdup(buf)),
 									NEXT_NONE);
 	free(buf);
 }
@@ -68,7 +68,7 @@ void	split_pipe_groups(t_data *data, t_exit_group *g)
 			double_quote = !double_quote;
 		else if (g->exit_group[i] == '|' && !single_quote && !double_quote)
 		{
-			g->pipe_groups = add_pipe_group(g->pipe_groups, ft_strdup(buf),
+			g->pipe_groups = add_pipe_group(g->pipe_groups, clean_spaces(ft_strdup(buf)),
 					NEXT_NONE);
 			ft_bzero(buf, (ft_strlen(g->exit_group) + 1) * sizeof(char));
 			i += 1;
@@ -78,7 +78,7 @@ void	split_pipe_groups(t_data *data, t_exit_group *g)
 		buf[j] = g->exit_group[i];
 	}
 	if (ft_strlen(buf))
-		g->pipe_groups = add_pipe_group(g->pipe_groups, ft_strdup(buf), NEXT_NONE);
+		g->pipe_groups = add_pipe_group(g->pipe_groups, clean_spaces(ft_strdup(buf)), NEXT_NONE);
 	free(buf);
 }
 
@@ -105,7 +105,7 @@ void	split_cmd(t_data *data, t_pipe_group *g)
 		else if (g->group[i] == '<' && g->group[i + 1] == '<'
 			&& !single_quote && !double_quote)
 		{
-			g->cmds = add_cmd(g->cmds, ft_strdup(buf), NEXT_HEREDOC);
+			g->cmds = add_cmd(g->cmds, clean_spaces(ft_strdup(buf)), NEXT_HEREDOC);
 			ft_bzero(buf, (ft_strlen(g->group) + 1) * sizeof(char));
 			j = -1;
 			i += 1;
@@ -113,7 +113,7 @@ void	split_cmd(t_data *data, t_pipe_group *g)
 		}
 		else if (g->group[i] == '<' && !single_quote && !double_quote)
 		{
-			g->cmds = add_cmd(g->cmds, ft_strdup(buf), NEXT_I_REDIRECT);
+			g->cmds = add_cmd(g->cmds, clean_spaces(ft_strdup(buf)), NEXT_I_REDIRECT);
 			ft_bzero(buf, (ft_strlen(g->group) + 1) * sizeof(char));
 			j = -1;
 			i += 1;
@@ -122,7 +122,7 @@ void	split_cmd(t_data *data, t_pipe_group *g)
 		else if (g->group[i] == '>' && g->group[i + 1] == '>'
 			&& !single_quote && !double_quote)
 		{
-			g->cmds = add_cmd(g->cmds, ft_strdup(buf), NEXT_APPEND);
+			g->cmds = add_cmd(g->cmds, clean_spaces(ft_strdup(buf)), NEXT_APPEND);
 			ft_bzero(buf, (ft_strlen(g->group) + 1) * sizeof(char));
 			j = -1;
 			i += 1;
@@ -130,7 +130,7 @@ void	split_cmd(t_data *data, t_pipe_group *g)
 		}
 		else if (g->group[i] == '>' && !single_quote && !double_quote)
 		{
-			g->cmds = add_cmd(g->cmds, ft_strdup(buf), NEXT_O_REDIRECT);
+			g->cmds = add_cmd(g->cmds, clean_spaces(ft_strdup(buf)), NEXT_O_REDIRECT);
 			ft_bzero(buf, (ft_strlen(g->group) + 1) * sizeof(char));
 			j = -1;
 			i += 1;
@@ -139,6 +139,6 @@ void	split_cmd(t_data *data, t_pipe_group *g)
 		buf[j] = g->group[i];
 	}
 	if (ft_strlen(buf))
-		g->cmds = add_cmd(g->cmds, ft_strdup(buf), NEXT_NONE);
+		g->cmds = add_cmd(g->cmds, clean_spaces(ft_strdup(buf)), NEXT_NONE);
 	free(buf);
 }

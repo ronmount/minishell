@@ -20,6 +20,8 @@ SRC 	= 	src/builtins/cd.c \
             src/utils/ft_strlcpy.c \
             src/utils/ft_strlen.c \
             src/utils/read_env.c \
+            src/utils/utils.c \
+            src/utils/ft_isspace.c \
 
 NAME = minishell
 

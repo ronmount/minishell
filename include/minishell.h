@@ -95,6 +95,7 @@ int				len_cmd(t_command *head);
 void			split_cmd(t_data *data, t_pipe_group *g);
 int				ft_isspace(char c);
 char			*clean_spaces(char *str);
+void			clean_exit_groups(t_data *p);
 
 int				ft_pwd(char *command);
 int				ft_cd(t_data *data, char *dir);

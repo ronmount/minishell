@@ -50,10 +50,10 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
-	printf("[%s]\n", ft_split("kek        lol       ", ' ')[0]);
-	printf("[%s]\n", ft_split("kek        lol       ", ' ')[1]);
 	while (1) {
 		str = readline("minishell: ");
+		if (!str)
+			continue ;
 		parse_line(data, str);
 		int i = -1;
 		int egl = len_exit_group(data->exit_groups);
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **env)
 				}
 			}
 		}
+		clean_exit_groups(data);
 	}
 	return (0);
 }

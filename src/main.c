@@ -50,6 +50,8 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
+	cmd_split("hello world \' \' \" 123 \" \' \'   lol");
+	return 0;
 	while (1) {
 		str = readline("minishell: ");
 		if (!str)

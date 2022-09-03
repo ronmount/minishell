@@ -50,12 +50,12 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
-	cmd_split("lol hi lol \" kek \" \' \' \" \' \' \"");
-	return 0;
+//	return 0;
 	while (1) {
 		str = readline("minishell: ");
 		if (!str)
 			continue ;
+		cmd_split(str);
 		parse_line(data, str);
 		int i = -1;
 		int egl = len_exit_group(data->exit_groups);

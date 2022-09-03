@@ -1,31 +1,5 @@
 #include "minishell.h"
 
-//int	count_substrings(char *str, char sep)
-//{
-//	int	i;
-//	int	c;
-//	int	in_sep;
-//	int	single_quote;
-//	int	double_quote;
-//
-//	i = -1;
-//	c = 0;
-//	in_sep = 0;
-//	single_quote = 0;
-//	double_quote = 0;
-//	// s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'
-//	while (str[i])
-//	{
-//		if (str[i] == '\'' && !double_quote)
-//			single_quote = !single_quote;
-//		else if (str[i] == '\"' && !single_quote)
-//			double_quote = !double_quote;
-//
-//		i += 1;
-//	}
-//	return (c);
-//}
-
 int ft_cw(char const *s)
 {
 	int i;
@@ -39,18 +13,18 @@ int ft_cw(char const *s)
 	double_quote = 0;
 	while (s[i])
 	{
-		if (s[i] == '\'' && !double_quote)
+		if (s[i] == '\'' && !double_quote && (i == 0 || s[i-1] != '\\'))
 		{
 			single_quote = !single_quote;
-			if (s[i - 1] != '\'' && !single_quote)
+			if (!single_quote && s[i - 1] != '\'')
 				cw++;
 			i++;
 			continue ;
 		}
-		else if (s[i] == '\"' && !single_quote)
+		else if (s[i] == '\"' && !single_quote && (i == 0 || s[i-1] != '\\'))
 		{
 			double_quote = !double_quote;
-			if (s[i - 1] != '\"' && !double_quote)
+			if (!double_quote && s[i - 1] != '\"')
 				cw++;
 			i++;
 			continue ;
@@ -60,10 +34,8 @@ int ft_cw(char const *s)
 			i++;
 			continue ;
 		}
-		if (!ft_isspace(s[i]) && (!ft_isspace(s[i + 1]) || s[i + 1] == '\0'))
-		{
+		if (!ft_isspace(s[i]) && (ft_isspace(s[i + 1]) || s[i + 1] == '\0'))
 			cw++;
-		}
 		i++;
 	}
 	return (cw);
@@ -87,21 +59,25 @@ int	*ft_count_size(const char *str, int *array_of_int, int cw)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] == '\'' && !double_quote)
+		if (str[i] == '\'' && !double_quote && (i == 0 || str[i-1] != '\\'))
 		{
 			single_quote = !single_quote;
+			word_len++;
 			i++;
 			continue ;
 		}
-		else if (str[i] == '\"' && !single_quote)
+		else if (str[i] == '\"' && !single_quote && (i == 0 || str[i-1] !=
+		'\\'))
 		{
 			double_quote = !double_quote;
+			word_len++;
 			i++;
 			continue ;
 		}
 		if (double_quote || single_quote)
 		{
 			i++;
+			word_len++;
 			continue ;
 		}
 		if (!ft_isspace(str[i]))
@@ -113,6 +89,8 @@ int	*ft_count_size(const char *str, int *array_of_int, int cw)
 		}
 		i++;
 	}
+	if (word_len != 0)
+		array_of_int[++j] = word_len;
 	return (array_of_int);
 }
 
@@ -125,9 +103,10 @@ char	**cmd_split(char *cmd)
 
 	i = -1;
 	count_words = ft_cw(cmd);
-	a = malloc(sizeof(char *) * (count_words + 1));
+	printf("%s\n%d\n", cmd, count_words);
 	array_of_int = ft_count_size(cmd, array_of_int, count_words);
-	while (++i < count_words)
-		a[i] = malloc(sizeof(char) * (array_of_int[i] + 1));
+	printf("%d %d", array_of_int[0], array_of_int[1]);
+//	while (++i < count_words)
+//		a[i] = malloc(sizeof(char) * (array_of_int[i] + 1));
  	return (a);
 }

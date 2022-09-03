@@ -100,5 +100,7 @@ char			**cmd_split(char *cmd);
 int				ft_pwd(char *command);
 int				ft_cd(t_data *data, char *dir);
 int				ft_env(t_data *data, char *command);
+char			**list_to_envp(t_list *env);
+int				len(t_list *head);
 
 #endif

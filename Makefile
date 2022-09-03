@@ -5,6 +5,7 @@ SRC 	= 	src/builtins/cd.c \
             src/list_utils/command.c \
             src/list_utils/pipe_group.c \
             src/list_utils/list.c \
+            src/list_utils/list_to_envp.c \
             src/list_utils/exit_group.c \
             src/main.c \
             src/utils/ft_bzero.c \

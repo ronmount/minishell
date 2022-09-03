@@ -50,7 +50,13 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
-	cmd_split("lol hi lol \" kek \" \' \' \" \' \' \"");
+//	cmd_split("lol hi lol \" kek \" \' \' \" \' \' \"");
+
+	char **test = list_to_envp(data->env);
+	for (int i = len(data->env)-1; i >= 0; i--)
+	{
+		printf("%s\n", test[i]);
+	}
 	return 0;
 	while (1) {
 		str = readline("minishell: ");

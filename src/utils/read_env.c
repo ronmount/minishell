@@ -26,20 +26,3 @@ t_list	*read_env(char **env)
 	}
 	return (head);
 }
-
-void	print_env(t_list *head)
-{
-	int		i;
-	t_list	*node;
-	t_list	*buf;
-
-	buf = head;
-	i = -1;
-	while (head)
-	{
-		++i;
-		node = get_n(head, i);
-		printf("%s=%s\n", (char *)node->key, (char *)node->value);
-		head = head->next;
-	}
-}

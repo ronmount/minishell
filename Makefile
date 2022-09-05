@@ -25,6 +25,7 @@ SRC 	= 	src/builtins/cd.c \
             src/utils/ft_isspace.c \
             src/cleaner/cleaner.c \
             src/lexer/cmd_split.c \
+            src/executor/execve.c \
 
 NAME = minishell
 

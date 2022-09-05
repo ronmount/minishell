@@ -34,6 +34,7 @@ typedef struct s_command
 {
 	char				*cmd;
 	int					next_flag;
+	int					exitcode;
 	struct s_command	*next;
 }	t_command;
 
@@ -41,16 +42,20 @@ typedef struct s_pipe_group
 {
 	char				*group;
 	t_command			*cmds;
-	struct s_pipe_group	*next;
 	int					next_flag;
+	int					exitcode;
+
+	struct s_pipe_group	*next;
 }	t_pipe_group;
 
 typedef struct s_exit_group
 {
 	char				*exit_group;
 	t_pipe_group		*pipe_groups;
-	struct s_exit_group	*next;
 	int					next_flag;
+	int					exitcode;
+
+	struct s_exit_group	*next;
 }	t_exit_group;
 
 typedef struct s_data
@@ -102,5 +107,6 @@ int				ft_cd(t_data *data, char *dir);
 int				ft_env(t_data *data, char *command);
 char			**list_to_envp(t_list *env);
 int				len(t_list *head);
+int				ft_execve(char **argv, char **envp, t_data *data);
 
 #endif

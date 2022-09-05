@@ -21,5 +21,6 @@ char	**list_to_envp(t_list *env)
 		tmp = tmp->next;
 		i++;
 	}
+	res[i] = 0;
 	return (res);
 }

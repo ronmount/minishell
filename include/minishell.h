@@ -12,6 +12,7 @@
 # include <readline/history.h>
 # include <errno.h>
 # include <string.h>
+# include <signal.h>
 
 enum e_next_code {
 	NEXT_AND,
@@ -108,5 +109,7 @@ int				ft_env(t_data *data, char *command);
 char			**list_to_envp(t_list *env);
 int				len(t_list *head);
 int				ft_execve(char **argv, char **envp, t_data *data);
+void			ft_exit_sig(int sig);
+void			ft_set_exit_sig(void);
 
 #endif

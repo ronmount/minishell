@@ -50,7 +50,7 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
-
+	ft_set_exit_sig();
 	while (1) {
 		str = readline("minishell: ");
 		if (!str)

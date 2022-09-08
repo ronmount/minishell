@@ -9,8 +9,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
-//# include "readline/readline.h"
-//# include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <errno.h>
 # include <string.h>
 # include <signal.h>

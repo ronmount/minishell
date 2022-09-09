@@ -111,6 +111,6 @@ char			**list_to_envp(t_list *env);
 int				len(t_list *head);
 int				ft_execve(char **argv, char **envp, t_data *data);
 void			interactive_exit(int sig);
-void			set_interactiv_exit(void);
+void			set_interactive_exit(void);
 
 #endif

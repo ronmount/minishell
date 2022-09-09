@@ -3,6 +3,7 @@
 # define BUILTIN "pwd:export:unset:env:exit:echo:cd"
 
 # include "stdlib.h"
+# include "readline/readline.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -12,6 +13,7 @@
 # include <readline/history.h>
 # include <errno.h>
 # include <string.h>
+# include <signal.h>
 
 enum e_next_code {
 	NEXT_AND,
@@ -108,5 +110,7 @@ int				ft_env(t_data *data, char *command);
 char			**list_to_envp(t_list *env);
 int				len(t_list *head);
 int				ft_execve(char **argv, char **envp, t_data *data);
+void			interactive_exit(int sig);
+void			set_interactive_exit(void);
 
 #endif

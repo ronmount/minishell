@@ -50,11 +50,11 @@ int	main(int argc, char **argv, char **env)
 	char	*str;
 
 	data = init(env);
-
+	set_interactive_exit();
 	while (1) {
 		str = readline("minishell: ");
 		if (!str)
-			continue ;
+			break ;
 		parse_line(data, str);
 		int i = -1;
 		int egl = len_exit_group(data->exit_groups);

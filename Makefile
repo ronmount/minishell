@@ -1,57 +1,54 @@
-SRC 	= 	src/builtins/cd.c \
-            src/builtins/env.c \
-            src/builtins/pwd.c \
-            src/lexer/parser.c \
-            src/list_utils/command.c \
-            src/list_utils/pipe_group.c \
-            src/list_utils/list.c \
-            src/list_utils/list_to_envp.c \
-            src/list_utils/exit_group.c \
-            src/main.c \
-            src/utils/ft_bzero.c \
-            src/utils/ft_calloc.c \
-            src/utils/ft_putchar_fd.c \
-            src/utils/ft_putendl_fd.c \
-            src/utils/ft_putstr_fd.c \
-            src/utils/ft_split.c \
-            src/utils/ft_strchr.c \
-            src/utils/ft_strcmp.c \
-            src/utils/ft_strdup.c \
-            src/utils/ft_strjoin.c \
-            src/utils/ft_strlcpy.c \
-            src/utils/ft_strlen.c \
-            src/utils/read_env.c \
-            src/utils/utils.c \
-            src/utils/ft_isspace.c \
-            src/cleaner/cleaner.c \
-            src/lexer/cmd_split.c \
-            src/executor/execve.c \
-            src/signals/signals.c \
-            src/signals/signal_func.c \
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rkaufman <rkaufman@student.42wolfsburg.de> +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/18 09:14:26 by rkaufman          #+#    #+#              #
+#    Updated: 2022/04/11 09:11:39 by rkaufman         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = minishell
+#valgrind --leak-check=full --show-leak-kinds=all --ignore-fn=readline ./minishell
+#valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes
 
-OBJS = ${SRC:%.c=%.o}
+NAME		:=	minishell
 
-CC = cc -fsanitize=address # -Wall -Werror -Wextra
+OBJ_FOLDER	:=	objs
+SRC_FOLDER	:=	src
 
-RM = rm -f
+CC			:=	cc
+HEADERFILE	:=	minishell.h
 
-# -l readline
-%.o:		%.c include/minishell.h
-			$(CC) -I include -c $< -o $@ -g
+SRCS		:=	main.c \
 
-all:		$(NAME)
+OBJS		:= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
 
-$(NAME):	$(OBJS)
-			$(CC) -l readline $(OBJS) -o $(NAME)
+CFLAGS		:=	-Wall -Wextra -Werror -g
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L/opt/homebrew/Cellar/readline/8.1.2/lib -lreadline -o $(NAME)
+
+$(OBJS): $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c
+	@mkdir -p $(@D)
+	$(CC) -c $(CFLAGS) -I/opt/homebrew/Cellar/readline/8.1.2/include -o $@ $<
 
 clean:
-			@$(RM) $(OBJS)
+	rm -fr $(OBJ_FOLDER)
 
-fclean:		clean
-			$(RM) $(NAME)
+fclean: clean
+	rm -fr $(NAME)
 
-re: 		fclean all
+re: fclean all
 
-.PHONY: 	clean fclean re all
+norm:
+	cd srcs && norminette -R CheckForbiddenSourceHeader $(SRCS)
+	norminette -R CheckForbiddenSourceHeader $(HEADERFILE)
+	
+val:
+	valgrind --leak-check=full --trace-children=yes --track-fds=yes -s ./minishell
+
+.PHONY: clean fclean re
